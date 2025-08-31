@@ -18,18 +18,18 @@ export const ConfettiPopup = ({ onComplete }: ConfettiPopupProps) => {
   ];
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-50">
+    <div className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center">
       {/* Happy 6 Months text */}
-      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 className="text-6xl font-bold text-white drop-shadow-2xl animate-love-bounce mb-8">
-          Happy 6 months of toghterness ❤️
+      <div className="text-center px-4 max-w-4xl mx-auto">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-2xl animate-love-bounce mb-6 leading-tight">
+          Happy 6 months of togetherness ❤️
         </h1>
         {/* Bubu & Dudu gif */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-4">
           <img 
             src="/src/assets/bubu-dudu.gif" 
             alt="Bubu & Dudu celebrating" 
-            className="w-48 h-36 drop-shadow-2xl animate-bounce"
+            className="w-32 h-24 md:w-40 md:h-30 lg:w-48 lg:h-36 drop-shadow-2xl animate-bounce rounded-lg"
           />
         </div>
       </div>
