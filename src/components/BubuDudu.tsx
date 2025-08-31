@@ -1,5 +1,5 @@
 import { useState } from "react";
-import bubuDuduImage from "../assets/bubu-dudu.png";
+import bubuDuduGif from "../assets/bubu-dudu.gif";
 
 interface BubuDuduProps {
   onSpecialClick: () => void;
@@ -8,6 +8,15 @@ interface BubuDuduProps {
 export const BubuDudu = ({ onSpecialClick }: BubuDuduProps) => {
   const [clickCount, setClickCount] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  
+  const clickMessages = [
+    "Click me! 💕",
+    "Click again! 😊",
+    "Keep going! 🥰", 
+    "Almost there! 💖",
+    "One more! 🎉",
+    "Last click! ✨"
+  ];
 
   const handleClick = () => {
     const newCount = clickCount + 1;
@@ -31,19 +40,17 @@ export const BubuDudu = ({ onSpecialClick }: BubuDuduProps) => {
         onClick={handleClick}
       >
         <img
-          src={bubuDuduImage}
+          src={bubuDuduGif}
           alt="Bubu & Dudu"
-          className="w-32 h-20 drop-shadow-lg animate-love-bounce"
+          className="w-32 h-24 drop-shadow-lg animate-love-bounce"
         />
         
-        {/* Click indicator */}
-        {clickCount > 0 && clickCount < 6 && (
-          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-            <div className="bg-love-pink text-white px-3 py-1 rounded-full text-sm font-medium animate-fade-in">
-              {clickCount}/6 ❤️
-            </div>
+        {/* Cute click message */}
+        <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+          <div className="bg-gradient-to-r from-pink-400 to-rose-400 text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg">
+            {clickMessages[clickCount] || clickMessages[0]}
           </div>
-        )}
+        </div>
       </div>
       
       {/* Floating hearts on click */}

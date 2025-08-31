@@ -16,9 +16,17 @@ export const Desktop = () => {
   const [activeApp, setActiveApp] = useState<AppType>(null);
   const [showLoveLetter, setShowLoveLetter] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const handleBubuDuduClick = () => {
     setShowConfetti(true);
+    setTimeout(() => {
+      setShowNotification(true);
+    }, 4500); // Show notification after confetti
+  };
+
+  const handleNotificationClick = () => {
+    setShowNotification(false);
     setShowLoveLetter(true);
   };
 
@@ -114,6 +122,24 @@ export const Desktop = () => {
       {/* Confetti animation */}
       {showConfetti && (
         <ConfettiPopup onComplete={() => setShowConfetti(false)} />
+      )}
+
+      {/* Notification popup */}
+      {showNotification && (
+        <div className="fixed bottom-8 right-8 z-[60]">
+          <div 
+            className="bg-gradient-to-r from-pink-400 to-rose-400 text-white p-4 rounded-2xl shadow-2xl cursor-pointer animate-bounce"
+            onClick={handleNotificationClick}
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">💌</span>
+              <div>
+                <p className="font-bold">New Message!</p>
+                <p className="text-sm opacity-90">There is a message for you 💕</p>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Taskbar */}
