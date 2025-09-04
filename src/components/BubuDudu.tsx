@@ -10,12 +10,7 @@ export const BubuDudu = ({ onSpecialClick }: BubuDuduProps) => {
   const [isAnimating, setIsAnimating] = useState(false);
   
   const clickMessages = [
-    "Click me! 💕",
-    "Click again! 😊",
-    "Keep going! 🥰", 
-    "Almost there! 💖",
-    "One more! 🎉",
-    "Last click! ✨"
+    "Click me! 💕"
   ];
 
   const handleClick = () => {
@@ -25,7 +20,7 @@ export const BubuDudu = ({ onSpecialClick }: BubuDuduProps) => {
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 300);
 
-    if (newCount === 6) {
+    if (newCount === 1) {
       onSpecialClick();
       setClickCount(0);
     }
