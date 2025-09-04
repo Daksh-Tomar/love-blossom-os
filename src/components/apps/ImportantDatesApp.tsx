@@ -37,14 +37,12 @@ export const ImportantDatesApp = () => {
   const [newDate, setNewDate] = useState({ date: "", title: "", description: "" });
   const [showBubuAnimation, setShowBubuAnimation] = useState(false);
 
-  // Show Bubu covering eyes when card is about to flip
+  // Show Bubu covering eyes when card is flipped
   useEffect(() => {
     if (isFlipped) {
       setShowBubuAnimation(true);
-      const timer = setTimeout(() => {
-        setShowBubuAnimation(false);
-      }, 1000);
-      return () => clearTimeout(timer);
+    } else {
+      setShowBubuAnimation(false);
     }
   }, [isFlipped]);
 
