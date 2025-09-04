@@ -15,14 +15,12 @@ export type AppType = "memories" | "diary" | "dates" | null;
 export const Desktop = () => {
   const [activeApp, setActiveApp] = useState<AppType>(null);
   const [showLoveLetter, setShowLoveLetter] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
   const handleBubuDuduClick = () => {
-    setShowConfetti(true);
-    setTimeout(() => {
-      setShowNotification(true);
-    }, 4500); // Show notification after confetti
+    // BubuDudu now handles its own animation sequence
+    // After completion, show notification directly
+    setShowNotification(true);
   };
 
   const handleNotificationClick = () => {
@@ -128,11 +126,6 @@ export const Desktop = () => {
       {/* Love letter popup */}
       {showLoveLetter && (
         <LoveLetterPopup onClose={() => setShowLoveLetter(false)} />
-      )}
-
-      {/* Confetti animation */}
-      {showConfetti && (
-        <ConfettiPopup onComplete={() => setShowConfetti(false)} />
       )}
 
       {/* Notification popup */}
