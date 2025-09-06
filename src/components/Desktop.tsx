@@ -16,6 +16,7 @@ export const Desktop = () => {
   const [activeApp, setActiveApp] = useState<AppType>(null);
   const [showLoveLetter, setShowLoveLetter] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [resetBubuDudu, setResetBubuDudu] = useState(false);
 
   const handleBubuDuduClick = () => {
     // BubuDudu now handles its own animation sequence
@@ -26,6 +27,11 @@ export const Desktop = () => {
   const handleNotificationClick = () => {
     setShowNotification(false);
     setShowLoveLetter(true);
+  };
+
+  const handleLoveLetterClose = () => {
+    setShowLoveLetter(false);
+    setResetBubuDudu(prev => !prev); // Trigger reset
   };
 
   const apps = [
@@ -82,7 +88,7 @@ export const Desktop = () => {
             className="flex flex-col items-center cursor-pointer group"
             onClick={() => setActiveApp(app.id)}
           >
-            <div className={`backdrop-blur-sm rounded-2xl p-4 mb-2 transition-all duration-300 group-hover:scale-110 love-glow animate-pulse group-hover:animate-bounce ${
+            <div className={`backdrop-blur-sm rounded-2xl p-4 mb-2 transition-all duration-300 group-hover:scale-105 ${
               app.id === 'memories' 
                 ? 'bg-gradient-to-br from-pink-400/80 to-purple-500/80 group-hover:from-pink-300/90 group-hover:to-purple-400/90' 
                 : app.id === 'diary'
@@ -104,7 +110,7 @@ export const Desktop = () => {
       </div>
 
       {/* Bubu & Dudu */}
-      <BubuDudu onSpecialClick={handleBubuDuduClick} />
+      <BubuDudu onSpecialClick={handleBubuDuduClick} resetTrigger={resetBubuDudu} />
 
       {/* App windows */}
       {activeApp && (
@@ -125,7 +131,7 @@ export const Desktop = () => {
 
       {/* Love letter popup */}
       {showLoveLetter && (
-        <LoveLetterPopup onClose={() => setShowLoveLetter(false)} />
+        <LoveLetterPopup onClose={handleLoveLetterClose} />
       )}
 
       {/* Notification popup */}
