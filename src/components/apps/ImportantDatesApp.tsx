@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Plus, Calendar, Heart, Eye, EyeOff } from "lucide-react";
-import bubuDuduImage from "../../assets/bubu-dudu.png";
+import { ChevronLeft, ChevronRight, Plus, Calendar, Heart } from "lucide-react";
 
 interface ImportantDate {
   id: string;
@@ -35,16 +34,6 @@ export const ImportantDatesApp = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [newDate, setNewDate] = useState({ date: "", title: "", description: "" });
-  const [showBubuAnimation, setShowBubuAnimation] = useState(false);
-
-  // Show Bubu covering eyes when card is flipped
-  useEffect(() => {
-    if (isFlipped) {
-      setShowBubuAnimation(true);
-    } else {
-      setShowBubuAnimation(false);
-    }
-  }, [isFlipped]);
 
   const handleCardClick = () => {
     setIsFlipped(!isFlipped);
@@ -106,25 +95,6 @@ export const ImportantDatesApp = () => {
         <p className="text-muted-foreground mt-2">Use ← → arrow keys to navigate</p>
       </div>
 
-      {/* Bubu animation overlay */}
-      {showBubuAnimation && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
-          <div className="flex items-center space-x-4 animate-fade-in">
-            <div className="relative">
-              <img src={bubuDuduImage} alt="Bubu & Dudu" className="w-24 h-16" />
-              {!isFlipped ? (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <EyeOff className="w-8 h-8 text-love-pink" />
-                </div>
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-2xl">😘💕</div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Main card area */}
       <div className="flex-1 flex items-center justify-center relative">
