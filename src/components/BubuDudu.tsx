@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import cuteDuduClick from "../assets/cute-dudu-click.png";
+import cuteDuduClick from "../assets/cute-dudu-click.gif";
 import bubuKiss from "../assets/bubu-kiss.gif";
 import duduHearts from "../assets/dudu-hearts.gif";
 
