@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Upload, Heart, Download, Trash2 } from "lucide-react";
+import { Upload, Heart, Download, Trash2, Edit3, Check, X } from "lucide-react";
 
 interface Memory {
   id: string;
@@ -23,6 +23,9 @@ export const MemoriesApp = () => {
       caption: "Cute dinner together 🥰"
     }
   ]);
+  
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editCaption, setEditCaption] = useState<string>("");
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -45,6 +48,26 @@ export const MemoriesApp = () => {
 
   const deleteMemory = (id: string) => {
     setMemories(prev => prev.filter(memory => memory.id !== id));
+  };
+
+  const startEditing = (id: string, currentCaption: string) => {
+    setEditingId(id);
+    setEditCaption(currentCaption);
+  };
+
+  const saveEdit = (id: string) => {
+    setMemories(prev => prev.map(memory => 
+      memory.id === id 
+        ? { ...memory, caption: editCaption }
+        : memory
+    ));
+    setEditingId(null);
+    setEditCaption("");
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditCaption("");
   };
 
   return (
@@ -77,7 +100,13 @@ export const MemoriesApp = () => {
                 alt={memory.caption}
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+                <button
+                  onClick={() => startEditing(memory.id, memory.caption)}
+                  className="bg-primary/80 text-primary-foreground p-2 rounded-full hover:bg-primary transition-colors"
+                >
+                  <Edit3 className="w-4 h-4" />
+                </button>
                 <button
                   onClick={() => deleteMemory(memory.id)}
                   className="bg-destructive/80 text-destructive-foreground p-2 rounded-full hover:bg-destructive transition-colors"
@@ -88,7 +117,37 @@ export const MemoriesApp = () => {
             </div>
             
             <div className="p-4">
-              <p className="text-card-foreground font-medium mb-2">{memory.caption}</p>
+              {editingId === memory.id ? (
+                <div className="mb-2">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={editCaption}
+                      onChange={(e) => setEditCaption(e.target.value)}
+                      className="flex-1 p-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-love-pink bg-background text-foreground"
+                      autoFocus
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') saveEdit(memory.id);
+                        if (e.key === 'Escape') cancelEdit();
+                      }}
+                    />
+                    <button
+                      onClick={() => saveEdit(memory.id)}
+                      className="bg-primary text-primary-foreground p-2 rounded-lg hover:bg-primary/90 transition-colors"
+                    >
+                      <Check className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={cancelEdit}
+                      className="bg-muted text-muted-foreground p-2 rounded-lg hover:bg-accent transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-card-foreground font-medium mb-2">{memory.caption}</p>
+              )}
               <p className="text-muted-foreground text-sm">{memory.date}</p>
             </div>
           </div>
