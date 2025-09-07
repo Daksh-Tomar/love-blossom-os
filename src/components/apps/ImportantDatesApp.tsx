@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Plus, Calendar, Heart } from "lucide-react";
+import bubuDuduImage from "../../assets/bubu-dudu.png";
 
 interface ImportantDate {
   id: string;
@@ -86,8 +87,8 @@ export const ImportantDatesApp = () => {
   const currentDate = dates[currentIndex];
 
   return (
-    <div className="h-full p-6 flex flex-col">
-      <div className="text-center mb-6">
+    <div className="h-full p-4 flex flex-col max-h-screen overflow-hidden">
+      <div className="text-center mb-4 flex-shrink-0">
         <h3 className="text-2xl font-bold text-card-foreground flex items-center justify-center gap-2">
           <Heart className="text-love-pink fill-current" />
           Our Important Dates
@@ -97,7 +98,7 @@ export const ImportantDatesApp = () => {
 
 
       {/* Main card area */}
-      <div className="flex-1 flex items-center justify-center relative">
+      <div className="flex-1 flex items-center justify-center relative min-h-0">
         {/* Navigation arrows */}
         <button
           onClick={() => {
@@ -125,8 +126,24 @@ export const ImportantDatesApp = () => {
           <ChevronRight className="w-6 h-6" />
         </button>
 
+        {/* Peeking Dudu - appears from right when card is not flipped */}
+        {!isFlipped && (
+          <div className="absolute right-16 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
+            <div className="animate-fade-in">
+              <img 
+                src={bubuDuduImage} 
+                alt="Dudu peeking" 
+                className="w-16 h-12 transform scale-x-[-1]" 
+              />
+              <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs text-gray-800 whitespace-nowrap border border-gray-200 shadow-lg">
+                👀 Peek!
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Card */}
-        <div className="relative w-80 h-96 mx-16 perspective-1000">
+        <div className="relative w-72 h-80 mx-20 perspective-1000">
           <div
             className={`w-full h-full relative transform-style-preserve-3d cursor-pointer transition-transform duration-600 ${
               isFlipped ? "rotate-y-180" : ""
@@ -134,18 +151,20 @@ export const ImportantDatesApp = () => {
             onClick={handleCardClick}
           >
             {/* Front of card */}
-            <div className="absolute inset-0 bg-gradient-love rounded-2xl shadow-dreamy backface-hidden flex flex-col items-center justify-center p-6 text-white">
-              <Calendar className="w-12 h-12 mb-4" />
-              <h4 className="text-2xl font-bold mb-2">{currentDate.title}</h4>
-              <p className="text-lg">{new Date(currentDate.date).toLocaleDateString()}</p>
-              <div className="mt-4 text-sm opacity-80">Click to reveal story ❤️</div>
+            <div className="absolute inset-0 bg-gradient-love rounded-2xl shadow-dreamy backface-hidden flex flex-col items-center justify-center p-4 text-white">
+              <Calendar className="w-10 h-10 mb-3" />
+              <h4 className="text-xl font-bold mb-2 text-center">{currentDate.title}</h4>
+              <p className="text-base mb-3">{new Date(currentDate.date).toLocaleDateString()}</p>
+              <div className="text-sm opacity-80 text-center">Click to reveal story ❤️</div>
             </div>
 
             {/* Back of card */}
-            <div className="absolute inset-0 bg-card rounded-2xl shadow-dreamy backface-hidden rotate-y-180 p-6 flex flex-col justify-center">
-              <h4 className="text-xl font-bold text-card-foreground mb-4">{currentDate.title}</h4>
-              <p className="text-card-foreground leading-relaxed">{currentDate.description}</p>
-              <div className="mt-4 text-sm text-muted-foreground text-center">
+            <div className="absolute inset-0 bg-card rounded-2xl shadow-dreamy backface-hidden rotate-y-180 p-4 flex flex-col justify-center">
+              <h4 className="text-lg font-bold text-card-foreground mb-3 text-center">{currentDate.title}</h4>
+              <div className="flex-1 flex items-center">
+                <p className="text-card-foreground leading-relaxed text-sm">{currentDate.description}</p>
+              </div>
+              <div className="text-xs text-muted-foreground text-center mt-2">
                 Click again to flip back
               </div>
             </div>
@@ -154,7 +173,7 @@ export const ImportantDatesApp = () => {
       </div>
 
       {/* Card counter and add button */}
-      <div className="flex items-center justify-between mt-6">
+      <div className="flex items-center justify-between mt-4 flex-shrink-0">
         <div className="text-muted-foreground">
           {currentIndex + 1} of {dates.length}
         </div>
