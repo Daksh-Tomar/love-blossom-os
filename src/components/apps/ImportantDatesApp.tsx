@@ -166,7 +166,7 @@ export const ImportantDatesApp = () => {
 
         {/* Peeking Dudu - appears from right when card is not flipped */}
         {!isFlipped && (
-          <div className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
+          <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
             <div className="animate-fade-in">
               <img 
                 src={bubuDuduImage} 
