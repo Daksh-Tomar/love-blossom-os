@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Plus, Calendar, Heart } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Calendar, Heart, Edit3, Trash2, Check, X } from "lucide-react";
 import bubuDuduImage from "../../assets/bubu-dudu.png";
 
 interface ImportantDate {
@@ -33,11 +33,49 @@ export const ImportantDatesApp = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editDate, setEditDate] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [newDate, setNewDate] = useState({ date: "", title: "", description: "" });
 
   const handleCardClick = () => {
+    if (editingId) return; // Don't flip when editing
     setIsFlipped(!isFlipped);
+  };
+
+  const startEditing = (date: ImportantDate) => {
+    setEditingId(date.id);
+    setEditTitle(date.title);
+    setEditDescription(date.description);
+    setEditDate(date.date);
+  };
+
+  const saveEdit = () => {
+    setDates(prev => prev.map(date => 
+      date.id === editingId 
+        ? { ...date, title: editTitle, description: editDescription, date: editDate }
+        : date
+    ));
+    setEditingId(null);
+    setEditTitle("");
+    setEditDescription("");
+    setEditDate("");
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditTitle("");
+    setEditDescription("");
+    setEditDate("");
+  };
+
+  const deleteDate = (id: string) => {
+    setDates(prev => prev.filter(date => date.id !== id));
+    if (currentIndex >= dates.length - 1 && currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
   };
 
   const handleKeyPress = (e: KeyboardEvent) => {
@@ -128,7 +166,7 @@ export const ImportantDatesApp = () => {
 
         {/* Peeking Dudu - appears from right when card is not flipped */}
         {!isFlipped && (
-          <div className="absolute right-16 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
+          <div className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
             <div className="animate-fade-in">
               <img 
                 src={bubuDuduImage} 
@@ -152,10 +190,72 @@ export const ImportantDatesApp = () => {
           >
             {/* Front of card */}
             <div className="absolute inset-0 bg-gradient-love rounded-2xl shadow-dreamy backface-hidden flex flex-col items-center justify-center p-4 text-white">
-              <Calendar className="w-10 h-10 mb-3" />
-              <h4 className="text-xl font-bold mb-2 text-center">{currentDate.title}</h4>
-              <p className="text-base mb-3">{new Date(currentDate.date).toLocaleDateString()}</p>
-              <div className="text-sm opacity-80 text-center">Click to reveal story ❤️</div>
+              {editingId === currentDate.id ? (
+                <div className="w-full space-y-3">
+                  <input
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    className="w-full p-2 rounded-lg text-gray-800 text-center font-bold"
+                    placeholder="Title"
+                  />
+                  <input
+                    type="date"
+                    value={editDate}
+                    onChange={(e) => setEditDate(e.target.value)}
+                    className="w-full p-2 rounded-lg text-gray-800 text-center"
+                  />
+                  <textarea
+                    value={editDescription}
+                    onChange={(e) => setEditDescription(e.target.value)}
+                    className="w-full p-2 rounded-lg text-gray-800 resize-none h-20 text-sm"
+                    placeholder="Story"
+                  />
+                  <div className="flex justify-center gap-2">
+                    <button
+                      onClick={saveEdit}
+                      className="bg-white/20 p-2 rounded-lg hover:bg-white/30 transition-colors"
+                    >
+                      <Check className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={cancelEdit}
+                      className="bg-white/20 p-2 rounded-lg hover:bg-white/30 transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <Calendar className="w-10 h-10 mb-3" />
+                  <h4 className="text-xl font-bold mb-2 text-center">{currentDate.title}</h4>
+                  <p className="text-base mb-3">{new Date(currentDate.date).toLocaleDateString()}</p>
+                  <div className="text-sm opacity-80 text-center">Click to reveal story ❤️</div>
+                  
+                  {/* Edit and Delete buttons */}
+                  <div className="absolute top-2 right-2 flex gap-1">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        startEditing(currentDate);
+                      }}
+                      className="bg-white/20 p-1.5 rounded-lg hover:bg-white/30 transition-colors"
+                    >
+                      <Edit3 className="w-3 h-3" />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteDate(currentDate.id);
+                      }}
+                      className="bg-red-500/80 p-1.5 rounded-lg hover:bg-red-500 transition-colors"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Back of card */}

@@ -3,14 +3,14 @@ import { Taskbar } from "./Taskbar";
 import { BubuDudu } from "./BubuDudu";
 import { AppWindow } from "./AppWindow";
 import { MemoriesApp } from "./apps/MemoriesApp";
-import { DiaryApp } from "./apps/DiaryApp";
+import { TodoApp } from "./apps/TodoApp";
 import { ImportantDatesApp } from "./apps/ImportantDatesApp";
 import { LoveLetterPopup } from "./LoveLetterPopup";
 import { ConfettiPopup } from "./ConfettiPopup";
 import loveWallpaper from "../assets/love-wallpaper.jpg";
-import { Heart, Camera, BookOpen, Calendar } from "lucide-react";
+import { Heart, Camera, CheckSquare, Calendar } from "lucide-react";
 
-export type AppType = "memories" | "diary" | "dates" | null;
+export type AppType = "memories" | "todo" | "dates" | null;
 
 export const Desktop = () => {
   const [activeApp, setActiveApp] = useState<AppType>(null);
@@ -42,10 +42,10 @@ export const Desktop = () => {
       component: MemoriesApp
     },
     {
-      id: "diary" as const,
-      name: "Diary",
-      icon: BookOpen,
-      component: DiaryApp
+      id: "todo" as const,
+      name: "Todo",
+      icon: CheckSquare,
+      component: TodoApp
     },
     {
       id: "dates" as const,
@@ -91,14 +91,14 @@ export const Desktop = () => {
             <div className={`backdrop-blur-sm rounded-2xl p-4 mb-2 transition-all duration-300 group-hover:scale-105 ${
               app.id === 'memories' 
                 ? 'bg-gradient-to-br from-pink-400/80 to-purple-500/80 group-hover:from-pink-300/90 group-hover:to-purple-400/90' 
-                : app.id === 'diary'
+                : app.id === 'todo'
                 ? 'bg-gradient-to-br from-emerald-400/80 to-teal-500/80 group-hover:from-emerald-300/90 group-hover:to-teal-400/90'
                 : 'bg-gradient-to-br from-orange-400/80 to-red-500/80 group-hover:from-orange-300/90 group-hover:to-red-400/90'
             }`}>
               <div className="relative">
                 <app.icon className="w-8 h-8 text-white drop-shadow-lg" />
                 {app.id === 'memories' && <span className="absolute -top-1 -right-1 text-xs">📸</span>}
-                {app.id === 'diary' && <span className="absolute -top-1 -right-1 text-xs">✏️</span>}
+                {app.id === 'todo' && <span className="absolute -top-1 -right-1 text-xs">✅</span>}
                 {app.id === 'dates' && <span className="absolute -top-1 -right-1 text-xs">💕</span>}
               </div>
             </div>
