@@ -173,7 +173,7 @@ export const ImportantDatesApp = () => {
                 <img 
                   src={bubuDuduImage} 
                   alt="Dudu peeking" 
-                  className="w-16 h-12 transform scale-x-[-1]" 
+                  className="w-16 h-12" 
                 />
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs text-gray-800 whitespace-nowrap border border-gray-200 shadow-lg">
                   👀 Peek!
