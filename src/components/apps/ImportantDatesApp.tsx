@@ -164,24 +164,23 @@ export const ImportantDatesApp = () => {
           <ChevronRight className="w-6 h-6" />
         </button>
 
-        {/* Peeking Dudu - appears from right when card is not flipped */}
-        {!isFlipped && (
-          <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
-            <div className="animate-fade-in">
-              <img 
-                src={bubuDuduImage} 
-                alt="Dudu peeking" 
-                className="w-16 h-12 transform scale-x-[-1]" 
-              />
-              <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs text-gray-800 whitespace-nowrap border border-gray-200 shadow-lg">
-                👀 Peek!
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Card */}
         <div className="relative w-72 h-80 mx-20 perspective-1000">
+          {/* Peeking Dudu - appears from right edge of card when not flipped */}
+          {!isFlipped && (
+            <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
+              <div className="animate-fade-in">
+                <img 
+                  src={bubuDuduImage} 
+                  alt="Dudu peeking" 
+                  className="w-16 h-12 transform scale-x-[-1]" 
+                />
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 text-xs text-gray-800 whitespace-nowrap border border-gray-200 shadow-lg">
+                  👀 Peek!
+                </div>
+              </div>
+            </div>
+          )}
           <div
             className={`w-full h-full relative transform-style-preserve-3d cursor-pointer transition-transform duration-600 ${
               isFlipped ? "rotate-y-180" : ""
