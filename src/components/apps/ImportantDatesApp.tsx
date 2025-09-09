@@ -168,7 +168,7 @@ export const ImportantDatesApp = () => {
         <div className="relative w-72 h-80 mx-20 perspective-1000">
           {/* Peeking Dudu - appears from right edge of card when not flipped */}
           {!isFlipped && (
-            <div className="absolute -right-12 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
+            <div className="absolute -right-14 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
               <div className="animate-fade-in">
                 <img 
                   src={bubuDuduImage} 
