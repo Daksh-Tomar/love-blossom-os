@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Plus, Calendar, Heart, Edit3, Trash2, Check, X } from "lucide-react";
-import bubuDuduImage from "../../assets/bubu-dudu.gif";
+import bubuDuduImage from "../../assets/cute-dudu-click.gif";
 
 interface ImportantDate {
   id: string;
