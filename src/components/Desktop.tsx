@@ -8,7 +8,7 @@ import { ImportantDatesApp } from "./apps/ImportantDatesApp";
 import { LoveLetterPopup } from "./LoveLetterPopup";
 import { ConfettiPopup } from "./ConfettiPopup";
 import loveWallpaper from "../assets/love-wallpaper.jpg";
-import { Heart, Camera, CheckSquare, Calendar } from "lucide-react";
+import { Heart, Sparkles, Star } from "lucide-react";
 
 export type AppType = "memories" | "todo" | "dates" | null;
 
@@ -38,19 +38,19 @@ export const Desktop = () => {
     {
       id: "memories" as const,
       name: "Memories",
-      icon: Camera,
+      icon: Sparkles,
       component: MemoriesApp
     },
     {
       id: "todo" as const,
       name: "Todo",
-      icon: CheckSquare,
+      icon: Heart,
       component: TodoApp
     },
     {
       id: "dates" as const,
       name: "Important Dates",
-      icon: Calendar,
+      icon: Star,
       component: ImportantDatesApp
     }
   ];
