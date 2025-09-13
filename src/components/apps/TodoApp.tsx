@@ -137,7 +137,7 @@ export const TodoApp = () => {
   return (
     <div className="h-full flex">
       {/* Sidebar for adding new todos */}
-      <div className="w-1/3 bg-muted/50 p-6 border-r border-border flex flex-col">
+      <div className="w-1/3 bg-muted/50 p-6 border-r border-border flex flex-col overflow-y-auto">
         <h3 className="text-xl font-bold text-card-foreground mb-4 flex items-center gap-2">
           <Plus className="text-love-pink" />
           New Todo
@@ -148,12 +148,12 @@ export const TodoApp = () => {
             <label className="block text-sm font-medium text-card-foreground mb-2">
               Type
             </label>
-            <div className="flex gap-1">
+            <div className="flex flex-wrap gap-2">
               {(['activity', 'date', 'outing'] as const).map(type => (
                 <button
                   key={type}
                   onClick={() => setNewTodo(prev => ({ ...prev, type }))}
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-xs transition-colors ${
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-xs shrink-0 transition-colors ${
                     newTodo.type === type 
                       ? "bg-love-pink text-white" 
                       : "bg-card text-card-foreground hover:bg-accent"
@@ -206,12 +206,14 @@ export const TodoApp = () => {
           )}
         </div>
         
-        <button
-          onClick={addTodo}
-          className="w-full mt-4 bg-gradient-love text-white py-3 rounded-lg hover:shadow-love transition-all duration-300 font-medium"
-        >
-          Add Todo ❤️
-        </button>
+        <div className="-mx-6 mt-4 sticky bottom-0 z-10 bg-muted/60 backdrop-blur supports-[backdrop-filter]:bg-muted/50 p-6 pt-3 border-t border-border">
+          <button
+            onClick={addTodo}
+            className="w-full bg-gradient-love text-white py-3 rounded-lg hover:shadow-love transition-all duration-300 font-medium"
+          >
+            Add Todo ❤️
+          </button>
+        </div>
       </div>
 
       {/* Main todos view */}
@@ -231,12 +233,12 @@ export const TodoApp = () => {
             >
               {editingId === todo.id ? (
                 <div className="space-y-3">
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {(['activity', 'date', 'outing'] as const).map(type => (
                       <button
                         key={type}
                         onClick={() => setEditTodo(prev => ({ ...prev, type }))}
-                        className={`flex items-center gap-1 px-2 py-1 rounded text-xs ${
+                        className={`flex items-center gap-1 px-2 py-1 rounded text-xs shrink-0 ${
                           editTodo.type === type 
                             ? "bg-love-pink text-white" 
                             : "bg-white text-gray-600"
