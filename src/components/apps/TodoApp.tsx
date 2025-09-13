@@ -137,13 +137,13 @@ export const TodoApp = () => {
   return (
     <div className="h-full flex">
       {/* Sidebar for adding new todos */}
-      <div className="w-1/3 bg-muted/50 p-6 border-r border-border">
+      <div className="w-1/3 bg-muted/50 p-6 border-r border-border flex flex-col">
         <h3 className="text-xl font-bold text-card-foreground mb-4 flex items-center gap-2">
           <Plus className="text-love-pink" />
           New Todo
         </h3>
         
-        <div className="space-y-4">
+        <div className="space-y-4 flex-1">
           <div>
             <label className="block text-sm font-medium text-card-foreground mb-2">
               Type
@@ -208,7 +208,7 @@ export const TodoApp = () => {
         
         <button
           onClick={addTodo}
-          className="w-full mt-6 bg-gradient-love text-white py-3 rounded-lg hover:shadow-love transition-all duration-300 font-medium"
+          className="w-full mt-4 bg-gradient-love text-white py-3 rounded-lg hover:shadow-love transition-all duration-300 font-medium"
         >
           Add Todo ❤️
         </button>
@@ -311,12 +311,6 @@ export const TodoApp = () => {
                       {todo.description}
                     </p>
                     
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                      {todo.date && (
-                        <span>📅 {new Date(todo.date).toLocaleDateString()}</span>
-                      )}
-                      <span>Added {new Date(todo.createdAt).toLocaleDateString()}</span>
-                    </div>
                   </div>
                   
                   <div className="flex gap-1 ml-4">
