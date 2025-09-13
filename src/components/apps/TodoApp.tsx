@@ -191,19 +191,6 @@ export const TodoApp = () => {
             />
           </div>
 
-          {(newTodo.type === 'date' || newTodo.type === 'outing') && (
-            <div>
-              <label className="block text-sm font-medium text-card-foreground mb-2">
-                Date
-              </label>
-              <input
-                type="date"
-                value={newTodo.date}
-                onChange={(e) => setNewTodo(prev => ({ ...prev, date: e.target.value }))}
-                className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-love-pink bg-card text-card-foreground"
-              />
-            </div>
-          )}
         </div>
         
         <div className="-mx-6 mt-4 sticky bottom-0 z-10 bg-muted/60 backdrop-blur supports-[backdrop-filter]:bg-muted/50 p-6 pt-3 border-t border-border">
@@ -263,14 +250,6 @@ export const TodoApp = () => {
                     className="w-full p-2 border rounded-lg bg-white resize-none h-20"
                   />
                   
-                  {(editTodo.type === 'date' || editTodo.type === 'outing') && (
-                    <input
-                      type="date"
-                      value={editTodo.date}
-                      onChange={(e) => setEditTodo(prev => ({ ...prev, date: e.target.value }))}
-                      className="w-full p-2 border rounded-lg bg-white"
-                    />
-                  )}
                   
                   <div className="flex justify-end gap-2">
                     <button
