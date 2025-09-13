@@ -5,12 +5,13 @@ import { AppWindow } from "./AppWindow";
 import { MemoriesApp } from "./apps/MemoriesApp";
 import { TodoApp } from "./apps/TodoApp";
 import { ImportantDatesApp } from "./apps/ImportantDatesApp";
+import { OurStoryApp } from "./apps/OurStoryApp";
 import { LoveLetterPopup } from "./LoveLetterPopup";
 import { ConfettiPopup } from "./ConfettiPopup";
 import loveWallpaper from "../assets/love-wallpaper.jpg";
-import { Heart, Sparkles, Star } from "lucide-react";
+import { Heart, Sparkles, Star, BookHeart } from "lucide-react";
 
-export type AppType = "memories" | "todo" | "dates" | null;
+export type AppType = "memories" | "todo" | "dates" | "story" | null;
 
 export const Desktop = () => {
   const [activeApp, setActiveApp] = useState<AppType>(null);
@@ -43,7 +44,7 @@ export const Desktop = () => {
     },
     {
       id: "todo" as const,
-      name: "Todo",
+      name: "To do",
       icon: Heart,
       component: TodoApp
     },
@@ -52,6 +53,12 @@ export const Desktop = () => {
       name: "Important Dates",
       icon: Star,
       component: ImportantDatesApp
+    },
+    {
+      id: "story" as const,
+      name: "Our Story",
+      icon: BookHeart,
+      component: OurStoryApp
     }
   ];
 
@@ -93,13 +100,16 @@ export const Desktop = () => {
                 ? 'bg-gradient-to-br from-pink-400/80 to-purple-500/80 group-hover:from-pink-300/90 group-hover:to-purple-400/90' 
                 : app.id === 'todo'
                 ? 'bg-gradient-to-br from-emerald-400/80 to-teal-500/80 group-hover:from-emerald-300/90 group-hover:to-teal-400/90'
-                : 'bg-gradient-to-br from-orange-400/80 to-red-500/80 group-hover:from-orange-300/90 group-hover:to-red-400/90'
+                : app.id === 'dates'
+                ? 'bg-gradient-to-br from-orange-400/80 to-red-500/80 group-hover:from-orange-300/90 group-hover:to-red-400/90'
+                : 'bg-gradient-to-br from-rose-400/80 to-pink-500/80 group-hover:from-rose-300/90 group-hover:to-pink-400/90'
             }`}>
               <div className="relative transform group-hover:rotate-6 transition-transform duration-200">
                 <app.icon className="w-8 h-8 text-white drop-shadow-lg group-hover:drop-shadow-2xl transition-all duration-200" />
                 {app.id === 'memories' && <span className="absolute -top-1 -right-1 text-xs animate-bounce">📸</span>}
                 {app.id === 'todo' && <span className="absolute -top-1 -right-1 text-xs animate-bounce">✅</span>}
                 {app.id === 'dates' && <span className="absolute -top-1 -right-1 text-xs animate-bounce">💕</span>}
+                {app.id === 'story' && <span className="absolute -top-1 -right-1 text-xs animate-bounce">📖</span>}
               </div>
             </div>
             <span className="text-white text-sm font-medium drop-shadow-lg group-hover:scale-105 transition-transform">

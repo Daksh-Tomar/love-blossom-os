@@ -125,7 +125,8 @@ export default {
 				'card-flip': 'card-flip 0.6s ease-in-out',
 				'confetti-fall': 'confetti-fall 3s linear infinite',
 				'slide-up': 'slide-up 0.5s ease-out',
-				'fade-in': 'fade-in 0.3s ease-out'
+				'fade-in': 'fade-in 0.3s ease-out',
+				'spin-slow': 'spin 3s linear infinite'
 			},
 			backgroundImage: {
 				'gradient-love': 'var(--gradient-love)',
