@@ -88,18 +88,18 @@ export const Desktop = () => {
             className="flex flex-col items-center cursor-pointer group"
             onClick={() => setActiveApp(app.id)}
           >
-            <div className={`backdrop-blur-sm rounded-2xl p-4 mb-2 transition-all duration-300 group-hover:scale-105 ${
+            <div className={`backdrop-blur-sm rounded-2xl p-4 mb-2 transition-all duration-300 group-hover:scale-110 group-hover:animate-pulse ${
               app.id === 'memories' 
                 ? 'bg-gradient-to-br from-pink-400/80 to-purple-500/80 group-hover:from-pink-300/90 group-hover:to-purple-400/90' 
                 : app.id === 'todo'
                 ? 'bg-gradient-to-br from-emerald-400/80 to-teal-500/80 group-hover:from-emerald-300/90 group-hover:to-teal-400/90'
                 : 'bg-gradient-to-br from-orange-400/80 to-red-500/80 group-hover:from-orange-300/90 group-hover:to-red-400/90'
             }`}>
-              <div className="relative">
-                <app.icon className="w-8 h-8 text-white drop-shadow-lg" />
-                {app.id === 'memories' && <span className="absolute -top-1 -right-1 text-xs">📸</span>}
-                {app.id === 'todo' && <span className="absolute -top-1 -right-1 text-xs">✅</span>}
-                {app.id === 'dates' && <span className="absolute -top-1 -right-1 text-xs">💕</span>}
+              <div className="relative transform group-hover:rotate-6 transition-transform duration-200">
+                <app.icon className="w-8 h-8 text-white drop-shadow-lg group-hover:drop-shadow-2xl transition-all duration-200" />
+                {app.id === 'memories' && <span className="absolute -top-1 -right-1 text-xs animate-bounce">📸</span>}
+                {app.id === 'todo' && <span className="absolute -top-1 -right-1 text-xs animate-bounce">✅</span>}
+                {app.id === 'dates' && <span className="absolute -top-1 -right-1 text-xs animate-bounce">💕</span>}
               </div>
             </div>
             <span className="text-white text-sm font-medium drop-shadow-lg group-hover:scale-105 transition-transform">
