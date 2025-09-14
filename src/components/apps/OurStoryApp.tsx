@@ -5,8 +5,8 @@ export const OurStoryApp = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [zoom, setZoom] = useState(100);
   
-  // For now using a sample PDF, user will replace later
-  const pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+  // Our story PDF file
+  const pdfUrl = "/our-story.pdf";
   
   const handleZoomIn = () => setZoom(prev => Math.min(prev + 25, 200));
   const handleZoomOut = () => setZoom(prev => Math.max(prev - 25, 50));
@@ -89,12 +89,12 @@ export const OurStoryApp = () => {
 
       {/* PDF Viewer Area */}
       <div className="flex-1 relative overflow-hidden">
-        <div className="absolute inset-2 bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-pink-200/50 overflow-hidden">
+        <div className="absolute inset-1 bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-pink-200/50 overflow-hidden">
           {/* Decorative border */}
           <div className="absolute inset-0 bg-gradient-to-br from-pink-100/50 to-rose-100/50 rounded-3xl"></div>
           
           {/* PDF Container */}
-          <div className="relative h-full p-3">
+          <div className="relative h-full p-2">
             <div 
               className="h-full w-full bg-white rounded-2xl shadow-inner overflow-hidden border-2 border-pink-100"
               style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'top left' }}
