@@ -1,15 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BookHeart, Download, ZoomIn, ZoomOut, RotateCw, Heart, Sparkles } from "lucide-react";
+import { Document, Page, pdfjs } from "react-pdf";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url
+).toString();
 
 export const OurStoryApp = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [zoom, setZoom] = useState(100);
+  const [numPages, setNumPages] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerHeight, setContainerHeight] = useState<number>(0);
   
   // Our story PDF file
   const pdfUrl = "/our-story.pdf";
   
   const handleZoomIn = () => setZoom(prev => Math.min(prev + 25, 200));
   const handleZoomOut = () => setZoom(prev => Math.max(prev - 25, 50));
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const cr = entry.contentRect;
+        setContainerHeight(cr.height);
+      }
+    });
+    ro.observe(el);
+    setContainerHeight(el.getBoundingClientRect().height);
+    return () => ro.disconnect();
+  }, []);
+
 
   return (
     <div className="h-full flex flex-col bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50">
@@ -96,14 +120,22 @@ export const OurStoryApp = () => {
           {/* PDF Container */}
           <div className="relative h-full p-2">
             <div 
+              ref={containerRef}
               className="h-full w-full bg-white rounded-2xl shadow-inner overflow-hidden border-2 border-pink-100"
-              style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'top left' }}
             >
-              <iframe
-                src={pdfUrl}
-                className="w-full h-full rounded-2xl"
-                title="Our Story PDF"
-              />
+              <Document 
+                file={pdfUrl}
+                onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                loading={<div className="p-6 text-center text-rose-700">Loading PDF...</div>}
+                error={<div className="p-6 text-center text-red-600">Failed to load PDF.</div>}
+              >
+                <Page 
+                  pageNumber={currentPage} 
+                  height={Math.max(100, Math.floor((containerHeight - 16) * (zoom / 100)))} 
+                  renderTextLayer={false}
+                  renderAnnotationLayer={false}
+                />
+              </Document>
             </div>
           </div>
           
