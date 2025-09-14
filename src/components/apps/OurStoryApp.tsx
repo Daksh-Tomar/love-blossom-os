@@ -89,12 +89,12 @@ export const OurStoryApp = () => {
 
       {/* PDF Viewer Area */}
       <div className="flex-1 relative overflow-hidden">
-        <div className="absolute inset-4 bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-pink-200/50 overflow-hidden">
+        <div className="absolute inset-2 bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-pink-200/50 overflow-hidden">
           {/* Decorative border */}
           <div className="absolute inset-0 bg-gradient-to-br from-pink-100/50 to-rose-100/50 rounded-3xl"></div>
           
           {/* PDF Container */}
-          <div className="relative h-full p-6">
+          <div className="relative h-full p-3">
             <div 
               className="h-full w-full bg-white rounded-2xl shadow-inner overflow-hidden border-2 border-pink-100"
               style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'top left' }}

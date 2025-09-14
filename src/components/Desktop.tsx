@@ -15,6 +15,8 @@ export type AppType = "memories" | "todo" | "dates" | "story" | null;
 
 export const Desktop = () => {
   const [activeApp, setActiveApp] = useState<AppType>(null);
+  const [minimizedApps, setMinimizedApps] = useState<AppType[]>([]);
+  const [maximizedApp, setMaximizedApp] = useState<AppType | null>(null);
   const [showLoveLetter, setShowLoveLetter] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [resetBubuDudu, setResetBubuDudu] = useState(false);
@@ -33,6 +35,29 @@ export const Desktop = () => {
   const handleLoveLetterClose = () => {
     setShowLoveLetter(false);
     setResetBubuDudu(prev => !prev); // Trigger reset
+  };
+
+  const handleMinimize = (app: AppType) => {
+    if (app) {
+      setMinimizedApps(prev => [...prev, app]);
+      setActiveApp(null);
+      if (maximizedApp === app) {
+        setMaximizedApp(null);
+      }
+    }
+  };
+
+  const handleRestoreFromTaskbar = (app: AppType) => {
+    setMinimizedApps(prev => prev.filter(a => a !== app));
+    setActiveApp(app);
+  };
+
+  const handleToggleMaximize = (app: AppType) => {
+    if (maximizedApp === app) {
+      setMaximizedApp(null);
+    } else {
+      setMaximizedApp(app);
+    }
   };
 
   const apps = [
@@ -127,6 +152,9 @@ export const Desktop = () => {
         <AppWindow
           title={apps.find(app => app.id === activeApp)?.name || ""}
           onClose={() => setActiveApp(null)}
+          onMinimize={() => handleMinimize(activeApp)}
+          isMaximized={maximizedApp === activeApp}
+          onToggleMaximize={() => handleToggleMaximize(activeApp)}
         >
           {(() => {
             const app = apps.find(a => a.id === activeApp);
@@ -163,7 +191,7 @@ export const Desktop = () => {
       )}
 
       {/* Taskbar */}
-      <Taskbar />
+      <Taskbar minimizedApps={minimizedApps} onRestoreApp={handleRestoreFromTaskbar} />
     </div>
   );
 };
