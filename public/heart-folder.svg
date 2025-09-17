@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 64 64" fill="none">
+  <!-- Folder base -->
+  <path d="M4 20c0-2.2 1.8-4 4-4h16l4 4h28c2.2 0 4 1.8 4 4v24c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V20z" fill="#FFD1DC" stroke="#FF8FAB" stroke-width="2" stroke-linejoin="round"></path>
+  <!-- Heart in center -->
+  <path d="M32 34c-2-4-8-4-10 0-2 4 2 9 10 14 8-5 12-10 10-14-2-4-8-4-10 0z" fill="#FF5C8A" stroke="#FF2D55" stroke-width="1.5" stroke-linejoin="round"></path>
+</svg>
