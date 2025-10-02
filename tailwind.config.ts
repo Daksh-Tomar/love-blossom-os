@@ -113,6 +113,12 @@ export default {
 					'50%': { transform: 'translate(20vw, 30vh) rotate(-15deg)' },
 					'75%': { transform: 'translate(-30vw, 10vh) rotate(10deg)' }
 				},
+				'flutter': {
+					'0%, 100%': { transform: 'rotateY(0deg) rotateZ(0deg)' },
+					'25%': { transform: 'rotateY(10deg) rotateZ(5deg)' },
+					'50%': { transform: 'rotateY(0deg) rotateZ(0deg)' },
+					'75%': { transform: 'rotateY(-10deg) rotateZ(-5deg)' }
+				},
 				'slide-up': {
 					'0%': { transform: 'translateY(100%)', opacity: '0' },
 					'100%': { transform: 'translateY(0)', opacity: '1' }
@@ -129,8 +135,9 @@ export default {
 				'sparkle': 'sparkle 1.5s ease-in-out infinite',
 				'love-bounce': 'love-bounce 2s ease-in-out infinite',
 				'card-flip': 'card-flip 0.6s ease-in-out',
-				'confetti-fall': 'confetti-fall 3s linear infinite',
+				'confetti-fall': 'confetti-fall 3s linear forwards',
 				'fly-around': 'fly-around 20s ease-in-out infinite',
+				'flutter': 'flutter 0.3s ease-in-out infinite',
 				'slide-up': 'slide-up 0.5s ease-out',
 				'fade-in': 'fade-in 0.3s ease-out',
 				'spin-slow': 'spin 3s linear infinite'
