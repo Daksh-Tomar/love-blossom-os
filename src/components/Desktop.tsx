@@ -8,6 +8,8 @@ import { ImportantDatesApp } from "./apps/ImportantDatesApp";
 import { OurStoryApp } from "./apps/OurStoryApp";
 import { LoveLetterPopup } from "./LoveLetterPopup";
 import { ConfettiPopup } from "./ConfettiPopup";
+import { Butterfly } from "./Butterfly";
+import { HiddenMessagePopup } from "./HiddenMessagePopup";
 import loveWallpaper from "../assets/love-wallpaper.jpg";
 import { Heart, Sparkles, Star, BookHeart } from "lucide-react";
 
@@ -20,6 +22,8 @@ export const Desktop = () => {
   const [showLoveLetter, setShowLoveLetter] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [resetBubuDudu, setResetBubuDudu] = useState(false);
+  const [showHiddenMessage, setShowHiddenMessage] = useState(false);
+  const [showButterfly, setShowButterfly] = useState(true);
 
   const handleBubuDuduClick = () => {
     // BubuDudu now handles its own animation sequence
@@ -144,6 +148,14 @@ export const Desktop = () => {
         ))}
       </div>
 
+      {/* Butterfly */}
+      {showButterfly && (
+        <Butterfly onClick={() => {
+          setShowButterfly(false);
+          setShowHiddenMessage(true);
+        }} />
+      )}
+
       {/* Bubu & Dudu */}
       <BubuDudu onSpecialClick={handleBubuDuduClick} resetTrigger={resetBubuDudu} />
 
@@ -165,6 +177,14 @@ export const Desktop = () => {
             return null;
           })()}
         </AppWindow>
+      )}
+
+      {/* Hidden message popup */}
+      {showHiddenMessage && (
+        <HiddenMessagePopup onClose={() => {
+          setShowHiddenMessage(false);
+          setShowButterfly(true);
+        }} />
       )}
 
       {/* Love letter popup */}

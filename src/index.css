@@ -150,6 +150,13 @@
     100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
   }
 
+  @keyframes fly-around {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(40vw, -20vh) rotate(15deg); }
+    50% { transform: translate(20vw, 30vh) rotate(-15deg); }
+    75% { transform: translate(-30vw, 10vh) rotate(10deg); }
+  }
+
   /* Love-themed utilities */
   .love-glow {
     box-shadow: 0 0 30px hsl(var(--love-pink) / 0.5);

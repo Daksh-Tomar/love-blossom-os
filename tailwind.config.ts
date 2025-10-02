@@ -107,6 +107,12 @@ export default {
 					'0%': { transform: 'translateY(-100vh) rotate(0deg)', opacity: '1' },
 					'100%': { transform: 'translateY(100vh) rotate(720deg)', opacity: '0' }
 				},
+				'fly-around': {
+					'0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
+					'25%': { transform: 'translate(40vw, -20vh) rotate(15deg)' },
+					'50%': { transform: 'translate(20vw, 30vh) rotate(-15deg)' },
+					'75%': { transform: 'translate(-30vw, 10vh) rotate(10deg)' }
+				},
 				'slide-up': {
 					'0%': { transform: 'translateY(100%)', opacity: '0' },
 					'100%': { transform: 'translateY(0)', opacity: '1' }
@@ -124,6 +130,7 @@ export default {
 				'love-bounce': 'love-bounce 2s ease-in-out infinite',
 				'card-flip': 'card-flip 0.6s ease-in-out',
 				'confetti-fall': 'confetti-fall 3s linear infinite',
+				'fly-around': 'fly-around 20s ease-in-out infinite',
 				'slide-up': 'slide-up 0.5s ease-out',
 				'fade-in': 'fade-in 0.3s ease-out',
 				'spin-slow': 'spin 3s linear infinite'
