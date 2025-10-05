@@ -174,13 +174,13 @@ Forever Yours 💕`;
 
         {/* Love Pictures Stage */}
         {stage === "pictures" && (
-          <div className="flex-1 flex flex-col items-center justify-center relative">
+          <div className="flex-1 flex flex-col items-center justify-center relative overflow-hidden">
             <img 
               src={lovePictures[currentPicture]} 
               alt={`Love picture ${currentPicture + 1}`}
-              className="w-full h-full object-contain rounded-2xl shadow-2xl"
+              className="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl"
             />
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4 bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full">
               {currentPicture > 0 && (
                 <button
                   onClick={() => setCurrentPicture(currentPicture - 1)}
@@ -196,7 +196,7 @@ Forever Yours 💕`;
                 {currentPicture < lovePictures.length - 1 ? "Next →" : "Finish 💕"}
               </button>
             </div>
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 flex gap-2 bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full">
               {lovePictures.map((_, i) => (
                 <div
                   key={i}
