@@ -53,9 +53,7 @@ Forever Yours 💕`;
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-[100] animate-fade-in p-4">
-      <div className={`bg-gradient-to-br from-pink-200 via-purple-200 to-rose-200 rounded-3xl p-8 w-full mx-auto shadow-2xl animate-scale-in border-4 border-white/40 flex flex-col relative ${
-        stage === "pictures" ? "max-w-7xl h-[95vh]" : "max-w-4xl max-h-[90vh] overflow-hidden"
-      }`}>
+      <div className="bg-gradient-to-br from-pink-200 via-purple-200 to-rose-200 rounded-3xl p-8 max-w-4xl w-full mx-auto shadow-2xl animate-scale-in border-4 border-white/40 max-h-[90vh] overflow-hidden flex flex-col relative">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -176,9 +174,9 @@ Forever Yours 💕`;
 
         {/* Love Pictures Stage */}
         {stage === "pictures" && (
-          <div className="flex-1 flex flex-col items-center justify-center gap-6">
+          <div className="flex-1 flex flex-col overflow-hidden">
             {/* Picture indicators at top */}
-            <div className="flex gap-2 bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full">
+            <div className="flex gap-2 justify-center bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full mb-4 self-center">
               {lovePictures.map((_, i) => (
                 <div
                   key={i}
@@ -190,16 +188,16 @@ Forever Yours 💕`;
             </div>
 
             {/* Picture container */}
-            <div className="flex-1 w-full flex items-center justify-center">
+            <div className="flex-1 overflow-auto flex items-center justify-center mb-4">
               <img 
                 src={lovePictures[currentPicture]} 
                 alt={`Love picture ${currentPicture + 1}`}
-                className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+                className="w-auto h-auto max-w-full rounded-2xl shadow-2xl"
               />
             </div>
 
             {/* Navigation buttons below picture */}
-            <div className="flex gap-4 pb-2">
+            <div className="flex gap-4 justify-center pb-2">
               {currentPicture > 0 && (
                 <button
                   onClick={() => setCurrentPicture(currentPicture - 1)}
