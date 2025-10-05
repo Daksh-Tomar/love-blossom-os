@@ -187,6 +187,18 @@ export const Desktop = () => {
         }} />
       )}
 
+      {/* Subtle hint for hidden message */}
+      {!showHiddenMessage && showButterfly && (
+        <div className="fixed bottom-8 right-8 z-30 animate-pulse">
+          <div className="text-2xl opacity-50 hover:opacity-100 transition-opacity cursor-default">
+            ✨
+          </div>
+          <div className="text-xs text-muted-foreground text-center mt-1 opacity-40">
+            psst...
+          </div>
+        </div>
+      )}
+
       {/* Love letter popup */}
       {showLoveLetter && (
         <LoveLetterPopup onClose={handleLoveLetterClose} />
